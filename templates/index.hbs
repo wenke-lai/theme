@@ -3,14 +3,14 @@
 <main class="min-h-screen bg-background">
   <div class="container mx-auto px-4 py-8">
     {{!-- Tag Cards Section --}}
-    {{> "sections/tags"}}
+    {{> "home/tags"}}
     
     {{!-- Main Content: Featured/Latest + Sidebar --}}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
       {{!-- Left Column: Featured & Latest --}}
       <div class="lg:col-span-2 space-y-12">
-        {{> "sections/featured"}}
-        {{> "sections/latest"}}
+        {{> "home/featured"}}
+        {{> "home/latest"}}
       </div>
       
       {{!-- Right Column: Sidebar --}}
