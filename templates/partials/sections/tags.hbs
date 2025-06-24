@@ -1,0 +1,11 @@
+<section class="py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {{#get "tags" limit="4" include="count.posts" as |tags|}}
+      {{#foreach tags}}
+        <a href="{{url}}" class="block transition-transform hover:scale-105">
+          {{> "components/tag-card"}}
+        </a>
+      {{/foreach}}
+    {{/get}}
+  </div>
+</section>

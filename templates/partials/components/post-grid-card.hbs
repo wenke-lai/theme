@@ -1,0 +1,53 @@
+<article class="group relative overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md">
+  <div class="{{#if large}}aspect-[4/3]{{else}}aspect-[16/9]{{/if}} overflow-hidden">
+    {{#if feature_image}}
+      <img src="{{img_url feature_image size=(if large "l" "m")}}" alt="{{title}}" class="h-full w-full object-cover transition-transform group-hover:scale-105" />
+    {{else}}
+      <div class="h-full w-full bg-muted flex items-center justify-center">
+        <svg class="h-12 w-12 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+        </svg>
+      </div>
+    {{/if}}
+    {{#if featured}}
+      <div class="absolute top-3 left-3">
+        <span class="inline-flex items-center rounded-full bg-featured px-2 py-1 text-xs font-medium text-white">
+          <svg class="mr-1 h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          Featured
+        </span>
+      </div>
+    {{/if}}
+  </div>
+  <div class="p-{{#if large}}6{{else}}4{{/if}}">
+    <div class="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+      <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM DD, YYYY"}}</time>
+      <span>•</span>
+      <span>{{reading_time}}</span>
+    </div>
+    <h3 class="{{#if large}}text-xl{{else}}text-lg{{/if}} font-semibold text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">{{title}}</h3>
+    <p class="text-sm text-muted-foreground line-clamp-{{#if large}}4{{else}}2{{/if}} mb-4">{{excerpt}}</p>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        {{#if authors}}
+          {{#foreach authors}}
+            <div class="flex items-center space-x-2">
+              {{#if profile_image}}
+                <img src="{{img_url profile_image size="xxs"}}" alt="{{name}}" class="h-6 w-6 rounded-full" />
+              {{/if}}
+              <span class="text-sm text-muted-foreground">{{name}}</span>
+            </div>
+          {{/foreach}}
+        {{/if}}
+      </div>
+      {{#if tags}}
+        <div class="flex items-center space-x-1">
+          {{#foreach tags limit="2"}}
+            <span class="inline-flex items-center rounded-full bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground">{{name}}</span>
+          {{/foreach}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</article>
