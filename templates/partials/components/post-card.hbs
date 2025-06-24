@@ -1,0 +1,49 @@
+<article class="group relative bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300">
+  <a href="{{url}}" class="block">
+    {{#if feature_image}}
+      <div class="aspect-[16/9] overflow-hidden">
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+             srcset="{{img_url feature_image size="s"}} 300w,
+                     {{img_url feature_image size="m"}} 600w,
+                     {{img_url feature_image size="l"}} 1000w,
+                     {{img_url feature_image size="xl"}} 2000w"
+             sizes="(max-width: 1000px) 400px, 700px"
+             src="{{img_url feature_image size="m"}}"
+             alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+      </div>
+    {{/if}}
+    
+    <div class="p-6">
+      <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+        {{title}}
+      </h3>
+      
+      {{#if excerpt}}
+        <p class="text-gray-600 line-clamp-3 mb-4">{{excerpt}}</p>
+      {{/if}}
+      
+      <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-3">
+          {{#if authors}}
+            {{#foreach authors limit="1"}}
+              <div class="flex items-center gap-2">
+                {{#if profile_image}}
+                  <img src="{{img_url profile_image size="xxs"}}" 
+                       alt="{{name}}" 
+                       class="w-6 h-6 rounded-full" />
+                {{/if}}
+                <span class="text-sm text-gray-600">{{name}}</span>
+              </div>
+            {{/foreach}}
+          {{/if}}
+        </div>
+        
+        <div class="flex items-center gap-3 text-sm text-gray-500">
+          <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM DD, YYYY"}}</time>
+          <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+          <span>{{reading_time}}</span>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>
