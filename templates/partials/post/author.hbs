@@ -1,0 +1,60 @@
+{{!-- Author Bio Section --}}
+{{#if authors}}
+  <section class="mt-12 pt-8 border-t border-border">
+    <h3 class="text-xl font-semibold text-foreground mb-6">About the Author{{#if authors.[1]}}s{{/if}}</h3>
+    <div class="space-y-6">
+      {{#foreach authors}}
+        <div class="flex items-start gap-6 p-6 rounded-lg border border-border bg-card">
+          {{#if profile_image}}
+            <img src="{{img_url profile_image size="s"}}" alt="{{name}}" class="w-20 h-20 rounded-full flex-shrink-0" />
+          {{else}}
+            <div class="w-20 h-20 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+              <svg class="h-8 w-8 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+          {{/if}}
+          <div class="flex-1 min-w-0">
+            <h4 class="text-lg font-semibold text-foreground mb-2">{{name}}</h4>
+            {{#if bio}}
+              <p class="text-muted-foreground mb-4">{{bio}}</p>
+            {{/if}}
+            <div class="flex items-center gap-4">
+              {{#if website}}
+                <a href="{{website}}" target="_blank" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                  Website
+                </a>
+              {{/if}}
+              {{#if twitter}}
+                <a href="{{twitter}}" target="_blank" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors">
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                  Twitter
+                </a>
+              {{/if}}
+              {{#if facebook}}
+                <a href="{{facebook}}" target="_blank" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors">
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  Facebook
+                </a>
+              {{/if}}
+            </div>
+            <div class="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
+              <span>{{plural count.posts empty='No posts' singular='% post' plural='% posts'}}</span>
+              {{#if location}}
+                <span>•</span>
+                <span>{{location}}</span>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      {{/foreach}}
+    </div>
+  </section>
+{{/if}}
