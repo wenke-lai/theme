@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{asset 'built/index.css'}}" />
+    <script src="{{asset 'built/index.js'}}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+    <title>{{meta_title}}</title>
+    {{ghost_head}}
+  </head>
+  <body class="text-foreground bg-background">
+    {{> header}}
+    {{{body}}}
+    {{> footer}}
+    {{ghost_foot}}
+  </body>
+</html>

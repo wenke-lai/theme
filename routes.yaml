@@ -1,0 +1,17 @@
+routes:
+  /about/:
+    template: about
+    data: page.about
+  /archive/:
+    template: archive
+  /featured/:
+    template: featured
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: index
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/
