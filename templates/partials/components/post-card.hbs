@@ -1,4 +1,4 @@
-<article class="group relative bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300">
+<article class="group relative bg-card rounded-xl shadow-sm border border-border overflow-hidden hover:shadow-lg transition-all duration-300">
   <a href="{{url}}" class="block">
     {{#if feature_image}}
       <div class="aspect-[16/9] overflow-hidden">
@@ -14,15 +14,15 @@
     {{/if}}
     
     <div class="p-6">
-      <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+      <h3 class="text-xl font-bold text-card-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
         {{title}}
       </h3>
       
       {{#if excerpt}}
-        <p class="text-gray-600 line-clamp-3 mb-4">{{excerpt}}</p>
+        <p class="text-muted-foreground line-clamp-3 mb-4">{{excerpt}}</p>
       {{/if}}
       
-      <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+      <div class="flex items-center justify-between mt-auto pt-4 border-t border-border">
         <div class="flex items-center gap-3">
           {{#if authors}}
             {{#foreach authors limit="1"}}
@@ -32,15 +32,15 @@
                        alt="{{name}}" 
                        class="w-6 h-6 rounded-full" />
                 {{/if}}
-                <span class="text-sm text-gray-600">{{name}}</span>
+                <span class="text-sm text-muted-foreground">{{name}}</span>
               </div>
             {{/foreach}}
           {{/if}}
         </div>
         
-        <div class="flex items-center gap-3 text-sm text-gray-500">
+        <div class="flex items-center gap-3 text-sm text-muted-foreground">
           <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMM DD, YYYY"}}</time>
-          <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+          <span class="w-1 h-1 bg-muted rounded-full"></span>
           <span>{{reading_time}}</span>
         </div>
       </div>
