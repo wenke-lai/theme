@@ -1,0 +1,2 @@
+# theme
+A Ghost Theme
