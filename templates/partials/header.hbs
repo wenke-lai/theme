@@ -1,0 +1,43 @@
+<header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  <div class="container flex h-14 max-w-screen-2xl items-center">
+    <div class="mr-4 hidden md:flex">
+      <a class="mr-6 flex items-center space-x-2" href="{{@site.url}}">
+        {{#if @site.icon}}
+          <img src="{{@site.icon}}" alt="{{@site.title}}" class="h-6 w-6" />
+        {{/if}}
+        <span class="hidden font-bold text-foreground sm:inline-block">{{@site.title}}</span>
+      </a>
+      <nav class="flex items-center gap-4 text-sm lg:gap-6">
+        <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="{{@site.url}}">Home</a>
+        <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="{{@site.url}}/about/">About</a>
+        <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="{{@site.url}}/archive/">Archive</a>
+        <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="{{@site.url}}/featured/">Featured</a>
+      </nav>
+    </div>
+    <button class="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 py-2 mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden" type="button">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <span class="sr-only">Toggle Menu</span>
+    </button>
+    <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+      <div class="w-full flex-1 md:w-auto md:flex-none">
+        <button class="inline-flex items-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64">
+          <span class="hidden lg:inline-flex">Search posts...</span>
+          <span class="inline-flex lg:hidden">Search...</span>
+          <kbd class="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 sm:flex">
+            <span class="text-xs">⌘</span>K
+          </kbd>
+        </button>
+      </div>
+      <nav class="flex items-center">
+        <a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-8 w-8 px-0" href="{{@site.url}}/rss/">
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
+          </svg>
+          <span class="sr-only">RSS Feed</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
