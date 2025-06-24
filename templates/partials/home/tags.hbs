@@ -1,0 +1,39 @@
+<section class="py-2">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {{#get "tags" limit="4" include="count.posts" filter="visibility:public" as |tags|}}
+      {{#foreach tags}}
+        <a href="{{url}}" class="block transition-transform hover:scale-105 tag-card-animate" data-index="{{@index}}">
+          {{> "components/tag-card" showDesc=false}}
+        </a>
+      {{/foreach}}
+    {{/get}}
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof Motion !== 'undefined') {
+    const tagCards = document.querySelectorAll('.tag-card-animate');
+    
+    // Set initial state
+    tagCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px) scale(0.9)';
+    });
+    
+    tagCards.forEach((card, index) => {
+      Motion.animate(card, 
+        { 
+          opacity: [0, 1], 
+          transform: ['translateY(20px) scale(0.9)', 'translateY(0px) scale(1)']
+        }, 
+        { 
+          duration: 0.5, 
+          delay: index * 0.1,
+          easing: 'ease-out'
+        }
+      );
+    });
+  }
+});
+</script>

@@ -1,0 +1,150 @@
+{{!-- Configurable Sidebar Component --}}
+<aside class="space-y-8 {{#if sticky}}sticky top-20{{/if}}">
+  
+  {{!-- Profile Section --}}
+  {{#if showProfile}}
+    <div class="rounded-lg border border-border bg-card p-6">
+      <div class="flex items-center space-x-3 mb-4">
+        {{#if @site.icon}}
+          <img src="{{@site.icon}}" alt="{{@site.title}}" class="h-10 w-10 rounded-full" />
+        {{/if}}
+        <div>
+          <h3 class="font-semibold text-foreground">{{@site.title}}</h3>
+          <div class="flex items-center space-x-1 text-muted-foreground">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+            </svg>
+            <span class="text-sm">{{@site.title}}</span>
+          </div>
+        </div>
+      </div>
+      {{#if @site.description}}
+        <p class="text-sm text-muted-foreground">{{@site.description}}</p>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  {{!-- Popular Tags Section --}}
+  {{#if showPopularTags}}
+    <div class="rounded-lg border border-border bg-card p-6">
+      <h3 class="font-semibold text-foreground mb-4">Popular Tags</h3>
+      {{#get "tags" limit="6" include="count.posts" order="count.posts desc" filter="visibility:public" as |popular_tags|}}
+        {{#if popular_tags}}
+          <div class="space-y-3">
+            {{#foreach popular_tags}}
+              <a href="{{url}}" class="flex items-center justify-between p-3 rounded-md border border-border hover:bg-accent/5 transition-colors group">
+                <div class="flex items-center space-x-3">
+                  <div class="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center">
+                    <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-foreground group-hover:text-primary transition-colors">{{name}}</h4>
+                    {{#if description}}
+                      <p class="text-xs text-muted-foreground line-clamp-1">{{description}}</p>
+                    {{/if}}
+                  </div>
+                </div>
+                <span class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                  {{plural count.posts empty='0 Posts' singular='% Post' plural='% Posts'}}
+                </span>
+              </a>
+            {{/foreach}}
+          </div>
+        {{else}}
+          <p class="text-sm text-muted-foreground">No tags yet.</p>
+        {{/if}}
+      {{/get}}
+    </div>
+  {{/if}}
+
+  {{!-- Subscribe Section --}}
+  {{#if showSubscribe}}
+    <div class="rounded-lg border border-border bg-card p-6">
+      <h3 class="font-semibold text-foreground mb-2">Stay Updated</h3>
+      <p class="text-sm text-muted-foreground mb-4">Subscribe to get the latest posts delivered right to your inbox.</p>
+      <div class="space-y-3">
+        <input type="email" placeholder="Enter your email" class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-ring" />
+        <button class="w-full bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+          Subscribe
+        </button>
+      </div>
+    </div>
+  {{/if}}
+
+  {{!-- Latest Posts Section --}}
+  {{#if showLatestPosts}}
+    <div class="rounded-lg border border-border bg-card p-6">
+      <h3 class="font-semibold text-foreground mb-4">Latest Posts</h3>
+      {{#get "posts" limit="5" as |latest_posts|}}
+        {{#if latest_posts}}
+          <div class="space-y-4">
+            {{#foreach latest_posts}}
+              <article class="group">
+                <a href="{{url}}" class="block">
+                  <div class="flex gap-3">
+                    {{#if feature_image}}
+                      <div class="w-16 h-16 flex-shrink-0 rounded-md overflow-hidden">
+                        <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                      </div>
+                    {{/if}}
+                    <div class="flex-1 min-w-0">
+                      <h4 class="font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 text-sm">{{title}}</h4>
+                      <div class="flex items-center mt-2 text-xs text-muted-foreground">
+                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                        <span class="mx-2">•</span>
+                        <span>{{reading_time}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            {{/foreach}}
+          </div>
+        {{else}}
+          <p class="text-sm text-muted-foreground">No posts yet.</p>
+        {{/if}}
+      {{/get}}
+    </div>
+  {{/if}}
+
+  {{!-- Related Posts Section (requires currentPost context) --}}
+  {{#if showRelatedPosts}}
+    {{#if @root.slug}}
+      <div class="rounded-lg border border-border bg-card p-6">
+        <h3 class="font-semibold text-foreground mb-4">Related Posts</h3>
+        {{#get "posts" limit="4" filter="slug:-{{@root.slug}}" include="tags" as |related_posts|}}
+          {{#if related_posts}}
+            <div class="space-y-4">
+              {{#foreach related_posts}}
+                <article class="group">
+                  <a href="{{url}}" class="block">
+                    <div class="flex gap-3">
+                      {{#if feature_image}}
+                        <div class="w-16 h-16 flex-shrink-0 rounded-md overflow-hidden">
+                          <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                        </div>
+                      {{/if}}
+                      <div class="flex-1 min-w-0">
+                        <h4 class="font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 text-sm">{{title}}</h4>
+                        <div class="flex items-center mt-2 text-xs text-muted-foreground">
+                          <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                          <span class="mx-2">•</span>
+                          <span>{{reading_time}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              {{/foreach}}
+            </div>  
+          {{else}}
+            <p class="text-sm text-muted-foreground">No related posts found.</p>
+          {{/if}}
+        {{/get}}
+      </div>
+    {{/if}}
+  {{/if}}
+
+</aside>
