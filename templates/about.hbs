@@ -1,0 +1,132 @@
+{{!< default}}
+
+{{#page}}
+<main class="container mx-auto px-4 py-8">
+  {{!-- Page Header --}}
+  <header class="mb-8 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">{{title}}</h1>
+    
+    {{#if custom_excerpt}}
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{custom_excerpt}}</p>
+    {{/if}}
+    
+    <div class="flex items-center justify-center gap-4 mt-6 text-sm text-muted-foreground">
+      <time datetime="{{date format='YYYY-MM-DD'}}">
+        Last updated: {{date format="MMMM DD, YYYY"}}
+      </time>
+      {{#if reading_time}}
+        <span>•</span>
+        <span>{{reading_time}}</span>
+      {{/if}}
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+    {{!-- Main Content --}}
+    <div class="lg:col-span-2">
+      <div class="bg-card border border-border rounded-xl p-8 shadow-sm">
+        {{#if feature_image}}
+          <div class="aspect-[3/1] overflow-hidden rounded-xl mb-8">
+            <img class="w-full h-full object-cover"
+                 srcset="{{img_url feature_image size="s"}} 300w,
+                         {{img_url feature_image size="m"}} 600w,
+                         {{img_url feature_image size="l"}} 1000w,
+                         {{img_url feature_image size="xl"}} 2000w"
+                 sizes="(max-width: 1000px) 100vw, 1000px"
+                 src="{{img_url feature_image size="l"}}"
+                 alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+          </div>
+        {{/if}}
+        
+        <div class="content text-card-foreground">
+          {{content}}
+        </div>
+      </div>
+    </div>
+
+    {{!-- Sidebar --}}
+    <div class="lg:col-span-1">
+      {{> "components/sidebar" 
+          showProfile=true 
+          showPopularTags=true 
+          showLatestPosts=true}}
+    </div>
+  </div>
+</main>
+{{/page}}
+
+<style>
+  .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    color: hsl(var(--card-foreground));
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .content h1 { font-size: 2.25rem; line-height: 2.5rem; }
+  .content h2 { font-size: 1.875rem; line-height: 2.25rem; }
+  .content h3 { font-size: 1.5rem; line-height: 2rem; }
+  .content h4 { font-size: 1.25rem; line-height: 1.75rem; }
+  
+  .content p {
+    color: hsl(var(--card-foreground));
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+  }
+  
+  .content a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  
+  .content a:hover {
+    color: hsl(var(--primary) / 0.8);
+  }
+  
+  .content ul, .content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: hsl(var(--card-foreground));
+  }
+  
+  .content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .content blockquote {
+    border-left: 4px solid hsl(var(--primary));
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .content img {
+    border-radius: 0.75rem;
+    margin: 2rem 0;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .content code {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--card-foreground));
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+  }
+  
+  .content pre {
+    background-color: hsl(var(--muted));
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  
+  .content pre code {
+    background: none;
+    padding: 0;
+  }
+</style>

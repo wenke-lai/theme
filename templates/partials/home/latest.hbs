@@ -4,22 +4,13 @@
     <a href="{{@site.url}}/archive/" class="text-sm text-primary hover:text-primary/80 transition-colors font-medium">View All →</a>
   </div>
   
-  {{#get "posts" limit="6" as |latest_posts|}}
-    {{#if latest_posts}}
-      <div class="space-y-0">
-        {{#foreach latest_posts}}
-          <a href="{{url}}" class="block">
-            {{> "components/post-list-card"}}
-          </a>
-        {{/foreach}}
-      </div>
-    {{else}}
-      <div class="text-center py-12 text-muted-foreground">
-        <svg class="mx-auto h-12 w-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-        </svg>
-        <p>No posts yet.</p>
-      </div>
-    {{/if}}
+  {{#get "posts" limit="6" include="authors"}}
+    <div class="space-y-0">
+      {{#foreach posts}}
+        <a href="{{url}}" class="block">
+          {{> "components/post-list-card"}}
+        </a>
+      {{/foreach}}
+    </div>
   {{/get}}
 </section>
