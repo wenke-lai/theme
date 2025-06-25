@@ -32,21 +32,19 @@
         {{#if popular_tags}}
           <div class="space-y-3">
             {{#foreach popular_tags}}
-              <a href="{{url}}" class="flex items-center justify-between p-3 rounded-md border border-border hover:bg-accent/5 transition-colors group">
-                <div class="flex items-center space-x-3">
-                  <div class="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center">
-                    <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 class="font-medium text-foreground group-hover:text-primary transition-colors">{{name}}</h4>
-                    {{#if description}}
-                      <p class="text-xs text-muted-foreground line-clamp-1">{{description}}</p>
-                    {{/if}}
-                  </div>
+              <a href="{{url}}" class="flex items-center p-3 rounded-md border border-border hover:bg-accent/5 transition-colors group">
+                <div class="h-8 w-8 flex-shrink-0 rounded-md bg-primary/10 flex items-center justify-center">
+                  <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
                 </div>
-                <span class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                <div class="flex-1 min-w-0 mx-3">
+                  <h4 class="font-medium text-foreground group-hover:text-primary transition-colors truncate">{{name}}</h4>
+                  {{#if description}}
+                    <p class="text-xs text-muted-foreground line-clamp-1">{{description}}</p>
+                  {{/if}}
+                </div>
+                <span class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full flex-shrink-0">
                   {{plural count.posts empty='0 Posts' singular='% Post' plural='% Posts'}}
                 </span>
               </a>
