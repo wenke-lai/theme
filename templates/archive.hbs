@@ -1,0 +1,52 @@
+{{!< default}}
+
+<main class="container mx-auto px-4 py-8">
+  {{!-- Archive Header --}}
+  <header class="mb-8 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">Archive</h1>
+    <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Browse through all our articles and stories.</p>
+  </header>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+    {{!-- Main Content --}}
+    <div class="lg:col-span-2">
+      {{#get "posts" order="published_at desc" as |latest_posts|}}
+        {{#if latest_posts}}
+          <div class="space-y-1">
+            {{#foreach latest_posts}}
+              <a href="{{url}}" class="block">
+                {{> "components/post-list-card"}}
+              </a>
+            {{/foreach}}
+          </div>
+          
+          {{!-- Pagination --}}
+          {{pagination}}
+          
+        {{else}}
+          {{!-- No Posts State --}}
+          <div class="text-center py-12">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+              <svg class="w-8 h-8 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-card-foreground mb-2">No posts yet</h2>
+            <p class="text-muted-foreground mb-4">There are no posts available at the moment.</p>
+            <a href="{{@site.url}}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 transition-colors">
+              Back to Home
+            </a>
+          </div>
+        {{/if}}
+      {{/get}}
+    </div>
+
+    {{!-- Sidebar --}}
+    <div class="lg:col-span-1">
+      {{> "components/sidebar" 
+          showProfile=true 
+          showPopularTags=true 
+          showLatestPosts=true}}
+    </div>
+  </div>
+</main>
