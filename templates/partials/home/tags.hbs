@@ -1,9 +1,9 @@
 <section class="py-2">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
     {{#get "tags" limit="4" include="count.posts" filter="visibility:public" as |tags|}}
       {{#foreach tags}}
-        <a href="{{url}}" class="block transition-transform hover:scale-105 tag-card-animate" data-index="{{@index}}">
-          {{> "components/tag-card" showDesc=false}}
+        <a href="{{url}}" class="block transition-transform hover:scale-105 tag-card-animate h-full" data-index="{{@index}}">
+          {{> "components/tag-card" showDesc=true}}
         </a>
       {{/foreach}}
     {{/get}}

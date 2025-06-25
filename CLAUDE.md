@@ -41,3 +41,7 @@ The build process:
 4. Creates production-ready theme package
 
 For development, Rollup includes livereload functionality that watches for changes in JS, CSS, and Handlebars files.
+
+## Workflow Rules
+
+- After making theme changes, always run `pnpm run deploy` to build, zip, and upload the theme to Ghost automatically
