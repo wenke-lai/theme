@@ -57,7 +57,7 @@
       <div class="w-full flex-1 md:w-auto md:flex-none" 
            data-motion="slideLeft" 
            data-motion-delay="0.6">
-        <button class="inline-flex items-center rounded-md font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 h-9 px-4 py-2 relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64">
+        <button class="inline-flex items-center rounded-md font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 h-9 px-4 py-2 relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" data-ghost-search>
           <span class="hidden lg:inline-flex">Search posts...</span>
           <span class="inline-flex lg:hidden">Search...</span>
           <kbd class="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 sm:flex transition-opacity duration-200">
@@ -162,5 +162,16 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
+  
+  // Add keyboard shortcut for search (Cmd+K / Ctrl+K)
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const searchButton = document.querySelector('[data-ghost-search]');
+      if (searchButton) {
+        searchButton.click();
+      }
+    }
+  });
 });
 </script>
