@@ -31,13 +31,9 @@
            data-motion="slideDown" 
            data-motion-delay="0.6">About</a>
         <a class="transition-all duration-300 hover:text-foreground/80 text-foreground/60 hover:scale-105" 
-           href="{{@site.url}}/archive/" 
-           data-motion="slideDown" 
-           data-motion-delay="0.7">Archive</a>
-        <a class="transition-all duration-300 hover:text-foreground/80 text-foreground/60 hover:scale-105" 
            href="{{@site.url}}/featured/" 
            data-motion="slideDown" 
-           data-motion-delay="0.8">Featured</a>
+           data-motion-delay="0.7">Featured</a>
       </nav>
     </div>
     
@@ -70,18 +66,6 @@
         </button>
       </div>
       
-      {{!-- RSS Link --}}
-      <nav class="flex items-center" 
-           data-motion="fadeIn" 
-           data-motion-delay="0.8">
-        <a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground hover:scale-110 hover:rotate-12 h-8 w-8 px-0" 
-           href="{{@site.url}}/rss/">
-          <svg class="h-4 w-4 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
-          </svg>
-          <span class="sr-only">RSS Feed</span>
-        </a>
-      </nav>
     </div>
   </div>
 </header>
