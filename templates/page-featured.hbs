@@ -1,5 +1,6 @@
 {{!< default}}
 
+{{#page}}
 {{> mobile-sidebar-header 
     showPopularTags=true 
     showLatestPosts=true}}
@@ -7,7 +8,8 @@
   {{!-- Featured Header --}}
   {{> "components/page-header" 
       title="Featured Posts" 
-      description="Discover our handpicked collection of featured articles and stories."}}
+      description="Discover our handpicked collection of featured articles and stories."
+      showImg=true}}
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}
@@ -52,3 +54,4 @@
     </div>
   </div>
 </main>
+{{/page}}

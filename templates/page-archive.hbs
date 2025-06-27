@@ -1,12 +1,14 @@
 {{!< default}}
 
+{{#page}}
 {{> mobile-sidebar-header 
     showPopularTags=true}}
 <main class="container mx-auto px-4 py-8">
   {{!-- Archive Header --}}
   {{> "components/page-header" 
       title="Archive" 
-      description="Browse through all our articles and stories."}}
+      description="Browse through all our articles and stories."
+      showImg=true}}
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}
@@ -51,3 +53,4 @@
     </div>
   </div>
 </main>
+{{/page}}
