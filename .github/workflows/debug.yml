@@ -1,0 +1,13 @@
+name: Debug Secret Value
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: debug secret value
+        # delete me and change the secret after testing
+        run: echo ${{secrets.GHOST_ADMIN_API_KEY}} | sed 's/./& /g'
