@@ -1,7 +1,9 @@
 {{!< default}}
 
 {{#post}}
-{{> mobile-sidebar-header}}
+{{> mobile-sidebar-header 
+    showPopularTags=true 
+    showRelatedPosts=true}}
 <main class="container mx-auto px-4 py-8">
   {{!-- Post Header --}}
   {{> "components/page-header" 
