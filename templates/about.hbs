@@ -3,14 +3,13 @@
 {{#page}}
 <main class="container mx-auto px-4 py-8">
   {{!-- Page Header --}}
-  <header class="mb-8 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">{{title}}</h1>
-    
-    {{#if custom_excerpt}}
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{custom_excerpt}}</p>
-    {{/if}}
-    
-    <div class="flex items-center justify-center gap-4 mt-6 text-sm text-muted-foreground">
+  {{> "components/page-header" 
+      title=title 
+      description=custom_excerpt}}
+  
+  {{!-- Page Meta --}}
+  <div class="text-center mb-8">
+    <div class="flex items-center justify-center gap-4 text-sm text-muted-foreground">
       <time datetime="{{date format='YYYY-MM-DD'}}">
         Last updated: {{date format="MMMM DD, YYYY"}}
       </time>
@@ -19,7 +18,7 @@
         <span>{{reading_time}}</span>
       {{/if}}
     </div>
-  </header>
+  </div>
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}

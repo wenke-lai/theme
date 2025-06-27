@@ -3,13 +3,9 @@
 {{#post}}
 <main class="container mx-auto px-4 py-8">
   {{!-- Post Header --}}
-  <header class="mb-8 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">{{title}}</h1>
-    
-    {{#if excerpt}}
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{excerpt}}</p>
-    {{/if}}
-  </header>
+  {{> "components/page-header" 
+      title=title 
+      description=excerpt}}
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}
