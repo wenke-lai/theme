@@ -2,10 +2,9 @@
 
 <main class="container mx-auto px-4 py-8">
   {{!-- Featured Header --}}
-  <header class="mb-8 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">Featured Posts</h1>
-    <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Discover our handpicked collection of featured articles and stories.</p>
-  </header>
+  {{> "components/page-header" 
+      title="Featured Posts" 
+      description="Discover our handpicked collection of featured articles and stories."}}
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}
@@ -43,7 +42,7 @@
 
     {{!-- Sidebar --}}
     <div class="lg:col-span-1">
-      {{> "components/sidebar" 
+      {{> "components/page-sidebar" 
           showProfile=true 
           showPopularTags=true 
           showLatestPosts=true}}

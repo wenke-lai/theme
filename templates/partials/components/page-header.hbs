@@ -1,0 +1,35 @@
+{{!--
+  Page Header Component
+  
+  Accepts the following parameters:
+  - title: Main title/heading (required)
+  - description: Subtitle/description text (optional)
+  - showImg: Whether to show feature image (default: false)
+--}}
+
+<header class="mb-8 lg:mb-12">
+  <div class="grid grid-cols-1 gap-8 lg:items-center {{#if showImg}}{{#if feature_image}}lg:grid-cols-3{{/if}}{{/if}}">
+    <div class="{{#if showImg}}{{#if feature_image}}lg:col-span-2 text-center lg:text-left{{else}}text-center{{/if}}{{else}}text-center{{/if}}">
+      <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">{{title}}</h1>
+      {{#if description}}
+        <p class="text-xl text-muted-foreground {{#unless showImg}}max-w-2xl mx-auto{{else}}{{#unless feature_image}}max-w-2xl mx-auto{{/unless}}{{/unless}}">{{description}}</p>
+      {{/if}}
+    </div>
+    
+    {{#if showImg}}
+      {{#if feature_image}}
+        <div class="lg:col-span-1">
+          <div class="aspect-[4/3] overflow-hidden rounded-xl max-w-sm mx-auto lg:max-w-none">
+            <img class="w-full h-full object-cover"
+                 srcset="{{img_url feature_image size="s"}} 300w,
+                         {{img_url feature_image size="m"}} 600w,
+                         {{img_url feature_image size="l"}} 1000w"
+                 sizes="(max-width: 1024px) 100vw, 33vw"
+                 src="{{img_url feature_image size="m"}}"
+                 alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</header>

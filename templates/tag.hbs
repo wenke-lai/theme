@@ -2,33 +2,12 @@
 
 <main class="container mx-auto px-4 py-8">
   {{!-- Tag Header --}}
-  <header class="mb-8">
-    {{#tag}}
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:items-center">
-        <div class="lg:col-span-2 text-center lg:text-left">
-          <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">{{name}}</h1>
-          
-          {{#if description}}
-            <p class="text-xl text-muted-foreground">{{description}}</p>
-          {{/if}}
-        </div>
-        
-        {{#if feature_image}}
-          <div class="lg:col-span-1">
-            <div class="aspect-[4/3] overflow-hidden rounded-xl max-w-sm mx-auto lg:max-w-none">
-              <img class="w-full h-full object-cover"
-                   srcset="{{img_url feature_image size="s"}} 300w,
-                           {{img_url feature_image size="m"}} 600w,
-                           {{img_url feature_image size="l"}} 1000w"
-                   sizes="(max-width: 1024px) 100vw, 33vw"
-                   src="{{img_url feature_image size="m"}}"
-                   alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{name}}{{/if}}" />
-            </div>
-          </div>
-        {{/if}}
-      </div>
-    {{/tag}}
-  </header>
+  {{#tag}}
+    {{> "components/page-header" 
+        title=name 
+        description=description 
+        showImg=true}}
+  {{/tag}}
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}
@@ -67,7 +46,7 @@
 
     {{!-- Sidebar --}}
     <div class="lg:col-span-1">
-      {{> "components/sidebar" 
+      {{> "components/page-sidebar" 
           showProfile=true 
           showPopularTags=true 
           showLatestPosts=true}}

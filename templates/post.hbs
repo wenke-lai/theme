@@ -3,56 +3,22 @@
 {{#post}}
 <main class="container mx-auto px-4 py-8">
   {{!-- Post Header --}}
-  <header class="mb-8 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-card-foreground mb-4">{{title}}</h1>
-    
-    {{#if excerpt}}
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{excerpt}}</p>
-    {{/if}}
-  </header>
+  {{> "components/page-header" 
+      title=title 
+      description=excerpt}}
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}
     <div class="lg:col-span-2">
-      <div class="bg-card border border-border rounded-xl p-8 shadow-sm">
-        {{#if feature_image}}
-          <div class="aspect-[3/1] overflow-hidden rounded-xl mb-8">
-            <img class="w-full h-full object-cover"
-                 srcset="{{img_url feature_image size="s"}} 300w,
-                         {{img_url feature_image size="m"}} 600w,
-                         {{img_url feature_image size="l"}} 1000w,
-                         {{img_url feature_image size="xl"}} 2000w"
-                 sizes="(max-width: 1000px) 100vw, 1000px"
-                 src="{{img_url feature_image size="l"}}"
-                 alt="{{title}}" />
-          </div>
-        {{/if}}
-        
-        <div class="prose prose-lg max-w-none text-card-foreground">
-          {{{html}}}
-        </div>
-        
-        {{!-- Post Tags --}}
-        {{#if tags}}
-          <div class="mt-12 pt-8 border-t border-border">
-            <div class="flex flex-wrap gap-2">
-              {{#foreach tags}}
-                <a href="{{url}}" class="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground hover:bg-accent transition-colors">
-                  <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                  </svg>
-                  {{name}}
-                </a>
-              {{/foreach}}
-            </div>
-          </div>
-        {{/if}}
-      </div>
+      {{> "components/page-content" 
+          content=html 
+          showFeatureImage=true 
+          showTags=true}}
     </div>
 
     {{!-- Sidebar --}}
     <div class="lg:col-span-1">
-      {{> "components/sidebar" 
+      {{> "components/page-sidebar" 
           showProfile=true 
           showPopularTags=true 
           showRelatedPosts=true}}
@@ -60,45 +26,4 @@
   </div>
 </main>
 
-<style>
-  /* Custom prose styles using CSS variables */
-  .prose {
-    --tw-prose-body: var(--foreground);
-    --tw-prose-headings: var(--foreground);
-    --tw-prose-lead: var(--muted-foreground);
-    --tw-prose-links: var(--primary);
-    --tw-prose-bold: var(--foreground);
-    --tw-prose-counters: var(--muted-foreground);
-    --tw-prose-bullets: var(--muted-foreground);
-    --tw-prose-hr: var(--border);
-    --tw-prose-quotes: var(--foreground);
-    --tw-prose-quote-borders: var(--border);
-    --tw-prose-captions: var(--muted-foreground);
-    --tw-prose-code: var(--foreground);
-    --tw-prose-pre-code: var(--foreground);
-    --tw-prose-pre-bg: var(--muted);
-    --tw-prose-th-borders: var(--border);
-    --tw-prose-td-borders: var(--border);
-  }
-  
-  /* Koenig editor content styles */
-  .kg-width-wide {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    max-width: 1200px;
-  }
-  
-  .kg-width-full {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-</style>
 {{/post}}

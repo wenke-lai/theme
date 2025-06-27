@@ -1,0 +1,178 @@
+{{!--
+  Main Content Component
+  
+  Accepts the following parameters:
+  - content: Main content to display (required)
+  - showFeatureImage: Whether to show feature image (default: true)
+  - showTags: Whether to show tags section (default: false)
+--}}
+
+<div class="bg-card border border-border rounded-xl p-8 shadow-sm">
+  {{#if showFeatureImage}}
+    {{#if feature_image}}
+      <div class="aspect-[2/1] overflow-hidden rounded-xl mb-2">
+        <img class="w-full h-full object-cover"
+             srcset="{{img_url feature_image size="s"}} 300w,
+                     {{img_url feature_image size="m"}} 600w,
+                     {{img_url feature_image size="l"}} 1000w,
+                     {{img_url feature_image size="xl"}} 2000w"
+             sizes="(max-width: 1000px) 100vw, 1000px"
+             src="{{img_url feature_image size="l"}}"
+             alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+      </div>
+      {{#if feature_image_caption}}
+        <div class="text-sm text-muted-foreground text-center mt-2 mb-8 italic">
+          {{{feature_image_caption}}}
+        </div>
+      {{else}}
+        {{#if feature_image_alt}}
+          <div class="text-sm text-muted-foreground text-center mt-2 mb-8 italic">
+            {{feature_image_alt}}
+          </div>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  {{/if}}
+  
+  <div class="content prose prose-lg max-w-none text-card-foreground">
+    {{{content}}}
+  </div>
+  
+  {{#if showTags}}
+    {{#if tags}}
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="flex flex-wrap gap-2">
+          {{#foreach tags}}
+            <a href="{{url}}" class="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground hover:bg-accent transition-colors">
+              <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 713 12V7a4 4 0 014-4z"></path>
+              </svg>
+              {{name}}
+            </a>
+          {{/foreach}}
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</div>
+
+<style>
+  /* Content styles for both pages and posts */
+  .content.prose h1, .content.prose h2, .content.prose h3, .content.prose h4, .content.prose h5, .content.prose h6 {
+    color: hsl(var(--card-foreground)) !important;
+    font-weight: 600 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .content.prose h1 { font-size: 2.25rem !important; line-height: 2.5rem !important; }
+  .content.prose h2 { font-size: 1.5rem !important; line-height: 2rem !important; }
+  .content.prose h3 { font-size: 1.25rem !important; line-height: 1.75rem !important; }
+  .content.prose h4 { font-size: 1.25rem !important; line-height: 1.75rem !important; }
+  
+  .content.prose hr {
+    margin-top: 1.75rem !important;
+  }
+  
+  .content p {
+    color: hsl(var(--card-foreground));
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+  }
+  
+  .content a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  
+  .content a:hover {
+    color: hsl(var(--primary) / 0.8);
+  }
+  
+  .content ul, .content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: hsl(var(--card-foreground));
+  }
+  
+  .content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .content blockquote {
+    border-left: 4px solid hsl(var(--primary));
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .content img {
+    border-radius: 0.75rem;
+    margin: 2rem 0;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .content code {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--card-foreground));
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+  }
+  
+  .content pre {
+    background-color: hsl(var(--muted));
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  
+  .content pre code {
+    background: none;
+    padding: 0;
+  }
+
+  /* Custom prose styles using CSS variables */
+  .prose {
+    --tw-prose-body: var(--foreground);
+    --tw-prose-headings: var(--foreground);
+    --tw-prose-lead: var(--muted-foreground);
+    --tw-prose-links: var(--primary);
+    --tw-prose-bold: var(--foreground);
+    --tw-prose-counters: var(--muted-foreground);
+    --tw-prose-bullets: var(--muted-foreground);
+    --tw-prose-hr: var(--border);
+    --tw-prose-quotes: var(--foreground);
+    --tw-prose-quote-borders: var(--border);
+    --tw-prose-captions: var(--muted-foreground);
+    --tw-prose-code: var(--foreground);
+    --tw-prose-pre-code: var(--foreground);
+    --tw-prose-pre-bg: var(--muted);
+    --tw-prose-th-borders: var(--border);
+    --tw-prose-td-borders: var(--border);
+  }
+  
+  /* Koenig editor content styles */
+  .kg-width-wide {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 1200px;
+  }
+  
+  .kg-width-full {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+</style>
