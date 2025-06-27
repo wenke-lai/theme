@@ -24,24 +24,9 @@
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     {{!-- Main Content --}}
     <div class="lg:col-span-2">
-      <div class="bg-card border border-border rounded-xl p-8 shadow-sm">
-        {{#if feature_image}}
-          <div class="aspect-[3/1] overflow-hidden rounded-xl mb-8">
-            <img class="w-full h-full object-cover"
-                 srcset="{{img_url feature_image size="s"}} 300w,
-                         {{img_url feature_image size="m"}} 600w,
-                         {{img_url feature_image size="l"}} 1000w,
-                         {{img_url feature_image size="xl"}} 2000w"
-                 sizes="(max-width: 1000px) 100vw, 1000px"
-                 src="{{img_url feature_image size="l"}}"
-                 alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
-          </div>
-        {{/if}}
-        
-        <div class="content text-card-foreground">
-          {{content}}
-        </div>
-      </div>
+      {{> "components/main-content" 
+          content=content 
+          showFeatureImage=true}}
     </div>
 
     {{!-- Sidebar --}}

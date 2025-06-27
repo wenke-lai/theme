@@ -1,0 +1,47 @@
+{{!--
+  Main Content Component
+  
+  Accepts the following parameters:
+  - content: Main content to display (required)
+  - showFeatureImage: Whether to show feature image (default: true)
+  - showTags: Whether to show tags section (default: false)
+  - contentClass: Additional CSS classes for content area
+--}}
+
+<div class="bg-card border border-border rounded-xl p-8 shadow-sm">
+  {{#if showFeatureImage}}
+    {{#if feature_image}}
+      <div class="aspect-[2/1] overflow-hidden rounded-xl mb-8">
+        <img class="w-full h-full object-cover"
+             srcset="{{img_url feature_image size="s"}} 300w,
+                     {{img_url feature_image size="m"}} 600w,
+                     {{img_url feature_image size="l"}} 1000w,
+                     {{img_url feature_image size="xl"}} 2000w"
+             sizes="(max-width: 1000px) 100vw, 1000px"
+             src="{{img_url feature_image size="l"}}"
+             alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+      </div>
+    {{/if}}
+  {{/if}}
+  
+  <div class="{{#if contentClass}}{{contentClass}}{{else}}content text-card-foreground{{/if}}">
+    {{{content}}}
+  </div>
+  
+  {{#if showTags}}
+    {{#if tags}}
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="flex flex-wrap gap-2">
+          {{#foreach tags}}
+            <a href="{{url}}" class="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground hover:bg-accent transition-colors">
+              <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 713 12V7a4 4 0 014-4z"></path>
+              </svg>
+              {{name}}
+            </a>
+          {{/foreach}}
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</div>
