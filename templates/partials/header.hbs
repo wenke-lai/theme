@@ -1,10 +1,10 @@
-<header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+<header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 hidden lg:block">
   <div class="container mx-auto flex h-16 items-center px-4" 
        data-motion="slideDown" 
        data-motion-delay="0.1">
     
     {{!-- Logo and Site Title --}}
-    <div class="mr-4 hidden md:flex" 
+    <div class="mr-4 flex" 
          data-motion="slideDown" 
          data-motion-delay="0.2">
       <a class="mr-6 flex items-center space-x-2 group" href="{{@site.url}}">
@@ -15,7 +15,7 @@
                data-motion="fadeIn" 
                data-motion-delay="0.3" />
         {{/if}}
-        <span class="hidden font-bold text-foreground sm:inline-block transition-colors group-hover:text-primary" 
+        <span class="font-bold text-foreground transition-colors group-hover:text-primary" 
               data-motion="slideRight" 
               data-motion-delay="0.4">{{@site.title}}</span>
       </a>
@@ -37,30 +37,19 @@
       </nav>
     </div>
     
-    {{!-- Mobile Menu Button --}}
-    <button class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground hover:scale-110 h-9 py-2 mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden" 
-            type="button"
-            data-motion="fadeIn" 
-            data-motion-delay="0.3">
-      <svg class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-      <span class="sr-only">Toggle Menu</span>
-    </button>
     
     {{!-- Search and RSS Section --}}
-    <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end" 
+    <div class="flex flex-1 items-center justify-end space-x-2" 
          data-motion="slideDown" 
          data-motion-delay="0.4">
       
       {{!-- Search Button --}}
-      <div class="w-full flex-1 md:w-auto md:flex-none" 
+      <div class="w-auto flex-none" 
            data-motion="slideLeft" 
            data-motion-delay="0.6">
-        <button class="inline-flex items-center rounded-md font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 h-9 px-4 py-2 relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" data-ghost-search>
-          <span class="hidden lg:inline-flex">Search posts...</span>
-          <span class="inline-flex lg:hidden">Search...</span>
-          <kbd class="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 sm:flex transition-opacity duration-200">
+        <button class="inline-flex items-center rounded-md font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 h-9 px-4 py-2 relative justify-start text-sm text-muted-foreground pr-12 w-64" data-ghost-search>
+          <span class="inline-flex">Search posts...</span>
+          <kbd class="pointer-events-none absolute right-1.5 top-1.5 h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 flex transition-opacity duration-200">
             <span class="text-xs">⌘</span>K
           </kbd>
         </button>

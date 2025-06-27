@@ -1,0 +1,64 @@
+{{!-- Mobile Header Component --}}
+<header class="sticky top-0 z-50 bg-background border-b border-border lg:hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      {{!-- Site Title/Logo --}}
+      <div class="flex-1">
+        <a href="{{@site.url}}" class="text-lg font-bold text-card-foreground">
+          {{@site.title}}
+        </a>
+      </div>
+      
+      {{!-- Search and Menu Buttons --}}
+      <div class="flex items-center gap-2">
+        {{!-- Search Button --}}
+        <button type="button" class="p-2 rounded-md text-muted-foreground hover:text-card-foreground hover:bg-muted" data-ghost-search>
+          <span class="sr-only">Search</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"></path>
+          </svg>
+        </button>
+        
+        {{!-- Mobile Menu Button --}}
+        <button type="button" class="p-2 rounded-md text-muted-foreground hover:text-card-foreground hover:bg-muted" id="mobile-menu-button">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  {{!-- Mobile Menu Panel --}}
+  <div class="hidden" id="mobile-menu-panel">
+    <div class="border-t border-border bg-background">
+      <div class="container mx-auto px-4 py-4 space-y-4">
+        <a href="{{@site.url}}" class="block text-card-foreground hover:text-primary">Home</a>
+        <a href="{{@site.url}}/archive" class="block text-card-foreground hover:text-primary">Archive</a>
+        <a href="{{@site.url}}/featured" class="block text-card-foreground hover:text-primary">Featured</a>
+        <a href="{{@site.url}}/about" class="block text-card-foreground hover:text-primary">About</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+  
+  if (mobileMenuButton && mobileMenuPanel) {
+    mobileMenuButton.addEventListener('click', function() {
+      mobileMenuPanel.classList.toggle('hidden');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!mobileMenuButton.contains(event.target) && !mobileMenuPanel.contains(event.target)) {
+        mobileMenuPanel.classList.add('hidden');
+      }
+    });
+  }
+});
+</script>

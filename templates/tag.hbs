@@ -1,5 +1,8 @@
 {{!< default}}
 
+{{> mobile-sidebar-header 
+    showPopularTags=true 
+    showLatestPosts=true}}
 <main class="container mx-auto px-4 py-8">
   {{!-- Tag Header --}}
   {{#tag}}
@@ -45,7 +48,7 @@
     </div>
 
     {{!-- Sidebar --}}
-    <div class="lg:col-span-1">
+    <div class="lg:col-span-1 hidden lg:block">
       {{> "components/page-sidebar" 
           showProfile=true 
           showPopularTags=true 
