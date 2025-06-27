@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "rollup -c --environment BUILD:production",
-    "zip": "npm run build && cd dist && bestzip $npm_package_name.zip ./*",
-    "deploy": "pnpm run zip && node upload.js",
+    "build": "rm -rf dist && rollup -c --environment BUILD:production",
+    "zip": "cd dist && bestzip $npm_package_name.zip ./*",
+    "upload": "node upload.js",
+    "deploy": "pnpm build && pnpm zip && pnpm upload",
     "test": "npx gscan ."
   },
   "devDependencies": {
