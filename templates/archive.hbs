@@ -1,5 +1,6 @@
 {{!< default}}
 
+{{> mobile-sidebar-header}}
 <main class="container mx-auto px-4 py-8">
   {{!-- Archive Header --}}
   {{> "components/page-header" 
@@ -41,7 +42,7 @@
     </div>
 
     {{!-- Sidebar --}}
-    <div class="lg:col-span-1">
+    <div class="lg:col-span-1 hidden lg:block">
       {{> "components/page-sidebar" 
           showProfile=true 
           showPopularTags=true 

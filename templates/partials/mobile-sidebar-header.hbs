@@ -1,0 +1,124 @@
+{{!-- Mobile Sidebar Header Component --}}
+<div class="sticky top-16 z-40 bg-background border-b border-border lg:hidden" id="mobile-sidebar-header">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-12">
+      {{!-- Profile Quick Access --}}
+      <div class="flex items-center space-x-2" id="mobile-profile-toggle">
+        {{#if @site.icon}}<img src="{{@site.icon}}" alt="{{@site.title}}" class="h-6 w-6 rounded-full" />{{/if}}
+        <span class="text-sm font-medium text-card-foreground">{{@site.title}}</span>
+        <svg class="w-4 h-4 text-muted-foreground transition-transform" id="profile-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      {{!-- Quick Actions --}}
+      <div class="flex items-center space-x-2">
+        <button type="button" class="p-1.5 rounded-md text-muted-foreground hover:text-card-foreground hover:bg-muted text-xs" id="mobile-tags-toggle">Tags</button>
+        <button type="button" class="p-1.5 rounded-md text-muted-foreground hover:text-card-foreground hover:bg-muted text-xs" id="mobile-subscribe-toggle">Subscribe</button>
+      </div>
+    </div>
+    {{!-- Expandable Content Panels --}}
+    <div class="hidden border-t border-border" id="mobile-sidebar-panels">
+      {{!-- Profile Panel --}}
+      <div class="hidden py-4" id="profile-panel">
+        <div class="flex items-center space-x-3 mb-3">
+          {{#if @site.icon}}<img src="{{@site.icon}}" alt="{{@site.title}}" class="h-8 w-8 rounded-full" />{{/if}}
+          <div>
+            <h4 class="font-semibold text-foreground text-sm">{{@site.title}}</h4>
+            <div class="flex items-center space-x-1 text-muted-foreground">
+              <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+              </svg>
+              <span class="text-xs">{{@site.title}}</span>
+            </div>
+          </div>
+        </div>
+        {{#if @site.description}}<p class="text-xs text-muted-foreground">{{@site.description}}</p>{{/if}}
+      </div>
+      {{!-- Tags Panel --}}
+      <div class="hidden py-4" id="tags-panel">
+        <h4 class="font-semibold text-foreground mb-3 text-sm">Popular Tags</h4>
+        {{#get "tags" limit="4" include="count.posts" order="count.posts desc" filter="visibility:public" as |popular_tags|}}
+          {{#if popular_tags}}
+            <div class="flex flex-wrap gap-2">
+              {{#foreach popular_tags}}
+                <a href="{{url}}" class="inline-flex items-center px-2 py-1 rounded-md border border-border hover:bg-accent/5 transition-colors text-xs">
+                  <svg class="h-3 w-3 text-primary mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                  </svg>
+                  <span class="text-foreground">{{name}}</span>
+                  <span class="ml-1 text-muted-foreground">({{count.posts}})</span>
+                </a>
+              {{/foreach}}
+            </div>
+          {{else}}
+            <p class="text-xs text-muted-foreground">No tags yet.</p>
+          {{/if}}
+        {{/get}}
+      </div>
+      {{!-- Subscribe Panel --}}
+      <div class="hidden py-4" id="subscribe-panel">
+        <h4 class="font-semibold text-foreground mb-2 text-sm">Stay Updated</h4>
+        <p class="text-xs text-muted-foreground mb-3">Subscribe to get the latest posts.</p>
+        <div class="flex gap-2">
+          <input type="email" placeholder="Enter email" class="flex-1 px-2 py-1.5 border border-input rounded-md bg-background text-foreground text-xs focus:outline-none focus:ring-1 focus:ring-ring" />
+          <button class="bg-primary text-primary-foreground px-3 py-1.5 rounded-md text-xs font-medium hover:bg-primary/90 transition-colors">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const profileToggle = document.getElementById('mobile-profile-toggle');
+  const tagsToggle = document.getElementById('mobile-tags-toggle');
+  const subscribeToggle = document.getElementById('mobile-subscribe-toggle');
+  const panels = document.getElementById('mobile-sidebar-panels');
+  const profilePanel = document.getElementById('profile-panel');
+  const tagsPanel = document.getElementById('tags-panel');
+  const subscribePanel = document.getElementById('subscribe-panel');
+  const chevron = document.getElementById('profile-chevron');
+  
+  let activePanel = null;
+  
+  function showPanel(panel) {
+    // Hide all panels first
+    [profilePanel, tagsPanel, subscribePanel].forEach(p => p.classList.add('hidden'));
+    
+    if (activePanel === panel) {
+      // Close if clicking the same panel
+      panels.classList.add('hidden');
+      chevron.style.transform = 'rotate(0deg)';
+      activePanel = null;
+    } else {
+      // Show the selected panel
+      panels.classList.remove('hidden');
+      panel.classList.remove('hidden');
+      chevron.style.transform = 'rotate(180deg)';
+      activePanel = panel;
+    }
+  }
+  
+  if (profileToggle) {
+    profileToggle.addEventListener('click', () => showPanel(profilePanel));
+  }
+  
+  if (tagsToggle) {
+    tagsToggle.addEventListener('click', () => showPanel(tagsPanel));
+  }
+  
+  if (subscribeToggle) {
+    subscribeToggle.addEventListener('click', () => showPanel(subscribePanel));
+  }
+  
+  // Close panels when clicking outside
+  document.addEventListener('click', function(event) {
+    const sidebarHeader = document.getElementById('mobile-sidebar-header');
+    if (sidebarHeader && !sidebarHeader.contains(event.target)) {
+      panels.classList.add('hidden');
+      chevron.style.transform = 'rotate(0deg)';
+      activePanel = null;
+    }
+  });
+});
+</script>
