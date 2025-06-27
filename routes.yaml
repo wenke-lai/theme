@@ -1,11 +1,4 @@
 routes:
-  /about/:
-    template: about
-    data: page.about
-  /archive/:
-    template: archive
-  /featured/:
-    template: featured
 
 collections:
   /:

@@ -1,0 +1,43 @@
+{{!< default}}
+
+{{#page}}
+{{> mobile-sidebar-header 
+    showPopularTags=true 
+    showLatestPosts=true}}
+<main class="container mx-auto px-4 py-8">
+  {{!-- Page Header --}}
+  {{> "components/page-header" 
+      title=title 
+      description=custom_excerpt}}
+  
+  {{!-- Page Meta --}}
+  <div class="text-center mb-8">
+    <div class="flex items-center justify-center gap-4 text-sm text-muted-foreground">
+      <time datetime="{{date format='YYYY-MM-DD'}}">
+        Last updated: {{date format="MMMM DD, YYYY"}}
+      </time>
+      {{#if reading_time}}
+        <span>•</span>
+        <span>{{reading_time}}</span>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+    {{!-- Main Content --}}
+    <div class="lg:col-span-2">
+      {{> "components/page-content" 
+          content=content 
+          showFeatureImage=true}}
+    </div>
+
+    {{!-- Sidebar --}}
+    <div class="lg:col-span-1 hidden lg:block">
+      {{> "components/page-sidebar" 
+          showProfile=true 
+          showPopularTags=true 
+          showLatestPosts=true}}
+    </div>
+  </div>
+</main>
+{{/page}}
