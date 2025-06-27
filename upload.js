@@ -1,7 +1,14 @@
 import GhostAdminAPI from "@tryghost/admin-api";
-import { key, url, version } from "./env.js";
+import dotenv from "dotenv";
 
-const api = new GhostAdminAPI({ url, key, version });
+// Load .env file for local development
+dotenv.config();
+
+const api = new GhostAdminAPI({
+  url: process.env.GHOST_URL,
+  key: process.env.GHOST_ADMIN_API_KEY,
+  version: process.env.GHOST_VERSION,
+});
 
 const result = await api.themes.upload({
   file: "./dist/theme.zip",

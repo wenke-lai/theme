@@ -30,8 +30,8 @@ jobs:
       run: npm run zip
       
     - name: Upload theme to Ghost
-      run: |
-        curl -X POST \
-          -H "Authorization: Ghost ${{ secrets.GHOST_ADMIN_API_KEY }}" \
-          -F "file=@dist/theme.zip" \
-          "${{ secrets.GHOST_URL }}/ghost/api/admin/themes/upload/"
+      env:
+        GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+        GHOST_URL: ${{ secrets.GHOST_URL }}
+        GHOST_VERSION: v5.0
+      run: node upload.js
